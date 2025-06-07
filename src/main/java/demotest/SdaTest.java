@@ -1,5 +1,7 @@
 package demotest;
 
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -12,9 +14,16 @@ public class SdaTest {
     private WebDriver driver;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\zolta\\IdeaProjects\\Z4086\\SDAFinalTest\\src\\main\\resources\\chromedriver.exe");
         driver = new ChromeDriver();
+
+    }
+
+    @After
+    public void provedPoUkonceniTestu(){
+        driver.close();
+        driver.quit();
 
     }
 
@@ -27,6 +36,9 @@ public class SdaTest {
         // toto mi najde na stranke prvok a vypise meno
         driver.findElement(By.id("name")).sendKeys("Zoltan");
         driver.findElement(By.id("email")).sendKeys("email@email.com");
+        // Toto nam overi, zda je spravny text
+        Assert.assertEquals("Student Registration Form", driver.findElement(By.xpath("/html/body/main/div/div/div[2]/form/h1")).getText());
+
 
     }
 
